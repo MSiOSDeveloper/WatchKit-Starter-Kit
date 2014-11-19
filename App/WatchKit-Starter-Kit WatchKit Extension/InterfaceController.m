@@ -26,23 +26,20 @@ static NSString * const kWSKDefaultTableRowType = @"defaultRow";
     if (self){
         // Initialize variables here.
         // Configure interface objects here.
-        NSLog(@"%@ initWithContext", self);
         
-        _peopleNames = @[@"Jay", @"Qing", @"Clayton"];
-        [self setupTable];
+        NSArray *people = @[@"Larry", @"Janice", @"Clayton"];
+        [self setupTableWithData:people];
     }
     return self;
 }
 
-- (void)setupTable
+- (void)setupTableWithData:(NSArray *)data
 {
-    NSUInteger numberOfPeople = self.peopleNames.count;
-    NSLog(@"%i", numberOfPeople);
-    [self.peopleTable setNumberOfRows:numberOfPeople withRowType:kWSKDefaultTableRowType];
+    [self.peopleTable setNumberOfRows:data.count withRowType:kWSKDefaultTableRowType];
     
-    for (NSInteger i = 0; i < numberOfPeople; ++i) {
+    for (NSInteger i = 0; i < self.peopleTable.numberOfRows; i++) {
         WSKPeopleRowController *rowController = [self.peopleTable rowControllerAtIndex:i];
-        [rowController.personLabel setText:self.peopleNames[i]];
+        [rowController.personLabel setText:data[i]];
     }
 }
 
